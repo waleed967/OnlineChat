@@ -11,7 +11,7 @@ app.get('/', function(req, res) {
 
 io.on('connection', function(socket) {
 
-    //new user 
+    //new users 
     socket.on('new user', function(data, callback) {
 
 

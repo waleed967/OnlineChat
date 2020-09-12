@@ -98,7 +98,7 @@
             $('#users').html(html);
         });
 
-        //send the message
+        //send the messages
         $('#send-message').submit(function(e) {
             e.preventDefault();
             socket.emit('send message', $('#message').val());
