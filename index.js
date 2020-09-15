@@ -67,57 +67,13 @@ io.on('connection', function(socket) {
             decrypted = Buffer.concat([decrypted, decipher.final()]);
             return decrypted.toString();
         }
-        //bcrypt.genSalt(saltRounds, function(err, salt) {
-        //  if (err) {
-        // throw err
-        //  } else {
-        // bcrypt.hash(data, salt, function(err, encrypt) {
-        //  if (err) {
-        //   throw err
-        //  } else {
-        //console.log("encrypt data is" + data)
-        var gfg = encrypt(data);
-        console.log("encrypt data is: " + gfg.encryptedData);
-        console.log("decrypt data is: " + decrypt(gfg));
-        // console.log("encrypt data is" + data)
 
+        var ende = encrypt(data);
+        console.log("encrypt data is: " + ende.encryptedData);
+        console.log("decrypt data is: " + decrypt(ende));
 
-        //}
-        // })
-        // }
-        // })
         // console.log(data);
     });
-
-
-
-
-
-
-
-
-    // send message 
-
-    //socket.on('send message', function(data) {
-    // io.sockets.emit('new message', { msg: data, nick: socket.nickname });
-    // });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

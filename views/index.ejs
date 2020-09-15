@@ -51,13 +51,7 @@
 
     <div id="contentWrap">
         <div id="users"></div>
-        <form action="/action_page.php">
-            <label for="cars">Choose a user :</label>
-            <select name="cars" id="cars">
-              <option value="volvo"></option>
-            </select>
-            <br><br>
-        </form>
+
         <div id="chatWrap">
             <div id="chat"></div>
             <form id="send-message">
@@ -100,9 +94,9 @@
                 //We test the online status
                 if (isNicknameOnline) {
                     var status = '<font color=green><b>Online</b></font>'
-                    var option = document.createElement("option");
-                    option.text = nickname;
-                    x.add(option);
+                        // var option = document.createElement("option");
+                        // option.text = nickname;
+                        // x.add(option);
                 } else {
                     var status = '<font color=red><b>Offline</b></font>'
                 }
@@ -115,13 +109,13 @@
         //send the messages
         $('#send-message').submit(function(e) {
             var selID = document.getElementById("cars");
-            var user = selID.options[selID.selectedIndex].text;
-            alert("User to send is " + user);
+            // var user = selID.options[selID.selectedIndex].text;
+            // alert("User to send is " + user);
 
 
             e.preventDefault();
 
-            socket.emit('specific user', user);
+            // socket.emit('specific user', user);
 
             socket.emit('send message', $('#message').val());
             $('#message').val('');
