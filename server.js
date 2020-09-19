@@ -97,7 +97,7 @@ app.get("/", homePageController);
 app.get("/auth-logout", logoutController);
 app.get('/auth-login', redirectIfAuthenticated, loginController);
 app.post('/users/login', redirectIfAuthenticated, loginUserController);
-app.get('/auth-getUser', getUserController);
+app.get('/auth-getUser', authentication, getUserController);
 //var bcrypt = require('bcryptjs');
 
 //const saltRounds = 10;
