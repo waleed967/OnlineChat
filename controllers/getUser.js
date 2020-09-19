@@ -1,5 +1,4 @@
 const User = require('../database/User');
-const Post = require('../database/User')
 
 module.exports = async(req, res) => {
     const user = await User.findById(req.params.userId);
