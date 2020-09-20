@@ -7,7 +7,7 @@ module.exports = (req, res) => {
             res.redirect('/');
         } else {
             // console.log("Coming here");
-            res.render('profile', { "name": data.username, "email": data.email });
+            res.render('profile', { "fname": data.fusername, "lname": data.lusername, "email": data.email, "password": data.password, "gender": data.gender });
             // console.log("Data " + data.username);
 
         }
