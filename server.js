@@ -20,6 +20,7 @@ const User = require('./database/User');
 
 const express = require('express');
 const getUserController = require('./controllers/getUser');
+const getUpdateController = require('./controllers/getUpdate');
 const createMessageController = require('./controllers/createMessage');
 const homePageController = require('./controllers/homePage');
 const registerUserController = require('./controllers/registerUser');
@@ -30,7 +31,8 @@ const logoutController = require("./controllers/logout");
 
 
 const authentication = require("./rangeware/authentication");
-const redirectIfAuthenticated = require('./rangeware/redirectIfAuthenticated')
+const redirectIfAuthenticated = require('./rangeware/redirectIfAuthenticated');
+const { request } = require('http');
 
 mongoose.connect('mongodb://localhost:27017/Teacher', { useNewUrlParser: true })
     .then(() => 'You are now connected to Mongo!')
@@ -97,6 +99,7 @@ app.get("/auth-logout", logoutController);
 app.get('/auth-login', redirectIfAuthenticated, loginController);
 app.post('/users/login', redirectIfAuthenticated, loginUserController);
 app.get('/auth-getUser', authentication, getUserController);
+app.get("/auth-getUpdate", authentication, getUpdateController);
 //var bcrypt = require('bcryptjs');
 
 //const saltRounds = 10;

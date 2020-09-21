@@ -3,12 +3,7 @@ const mongoose = require('mongoose')
 
 const UserSchema = new mongoose.Schema({
     unique_id: { type: Number },
-    fusername: {
-        type: String,
-        required: true
-    },
-
-    lusername: {
+    username: {
         type: String,
         required: true
     },
@@ -20,11 +15,8 @@ const UserSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true
-    },
-    gender: {
-        type: String,
-        required: true
     }
+
 })
 
 UserSchema.pre('save', function(next) {
@@ -35,5 +27,9 @@ UserSchema.pre('save', function(next) {
         next()
     })
 })
+
+
+
+
 const User = mongoose.model('User', UserSchema);
 module.exports = User;
