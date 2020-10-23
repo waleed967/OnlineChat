@@ -16,15 +16,15 @@ const { emit } = require('process');
 
 nicknames = {};
 
-app.get('/', function(req, res) {
+app.get('/', function (req, res) {
     res.render('index.ejs', { root: 'views' });
 });
 
 
-io.on('connection', function(socket) {
+io.on('connection', function (socket) {
 
     //new users 
-    socket.on('new user', function(data, callback) {
+    socket.on('new user', function (data, callback) {
 
 
         if (nicknames.hasOwnProperty(data)) {
@@ -47,17 +47,21 @@ io.on('connection', function(socket) {
 
     }
 
-    socket.on('send message', function(data) {
+    socket.on('send message', function (data) {
 
-        io.sockets.emit('new message', { msg: data, nick: socket.nickname });
+
 
         function encrypt(data) {
             let cipher = crypto.createCipheriv('aes-256-cbc', Buffer.from(key), iv);
             let encrypted = cipher.update(data);
             encrypted = Buffer.concat([encrypted, cipher.final()]);
             return { iv: iv.toString('hex'), encryptedData: encrypted.toString('hex') };
-        }
 
+
+        }
+        var gfg = encrypt(data);
+
+        io.sockets.emit('new message', { msg: gfg.encryptedData, nick: socket.nickname });
 
         function decrypt(data) {
             let iv = Buffer.from(data.iv, 'hex');
@@ -67,6 +71,10 @@ io.on('connection', function(socket) {
             decrypted = Buffer.concat([decrypted, decipher.final()]);
             return decrypted.toString();
         }
+
+
+
+
         //bcrypt.genSalt(saltRounds, function(err, salt) {
         //  if (err) {
         // throw err
@@ -76,8 +84,11 @@ io.on('connection', function(socket) {
         //   throw err
         //  } else {
         //console.log("encrypt data is" + data)
-        var gfg = encrypt(data);
-        console.log("encrypt data is: " + gfg.encryptedData);
+
+
+
+        // console.log("encrypt data is: " + gfg.encryptedData);
+
         console.log("decrypt data is: " + decrypt(gfg));
         // console.log("encrypt data is" + data)
 
@@ -124,7 +135,7 @@ io.on('connection', function(socket) {
 
     //disconnected service
 
-    socket.on('disconnect', function(data) {
+    socket.on('disconnect', function (data) {
         console.log('user disconnected:' + socket.nickname)
         if (!socket.nickname) return;
         nicknames[socket.nickname].online = false;
@@ -134,6 +145,6 @@ io.on('connection', function(socket) {
 
 });
 
-http.listen(80, function() {
+http.listen(80, function () {
     console.log('listening on *:80');
 });
